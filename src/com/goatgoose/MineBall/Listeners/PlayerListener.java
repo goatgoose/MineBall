@@ -7,7 +7,9 @@ import com.goatgoose.mineball.Tasks.BaseballManagerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_7_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -95,7 +97,22 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        event.setCancelled(true);
+        if(event.getDamager() instanceof Player) {
+            Player damager = (Player)event.getDamager();
+            Player damaged = (Player)event.getEntity();
+            net.minecraft.server.v1_7_R1.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(damager.getItemInHand());
+            if(nmsItemStack.tag.getInt("MBBaseballItem") == 1) {
+
+                BaseballPlayer baseballPlayerDamager = plugin.getBaseballPlayer(damager);
+                BaseballPlayer baseballPlayerDamaged =plugin.getBaseballPlayer(damaged);
+
+                if(baseballPlayerDamager == null || baseballPlayerDamaged == null) {
+                    return;
+                }
+
+                baseballPlayerDamaged.baseballCatchEvent();
+            }
+        }
     }
 
 }

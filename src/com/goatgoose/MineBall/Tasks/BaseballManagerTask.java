@@ -56,6 +56,7 @@ public class BaseballManagerTask implements Runnable {
                 }
             }
         } else {
+            // TODO create new BaseballItem at this location
             stopTask();
         }
 

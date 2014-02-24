@@ -8,13 +8,13 @@ import org.bukkit.entity.Arrow;
 
 public class Baseball {
 
-    MineBall plugin;
+    private MineBall plugin;
 
-    Arrow arrow;
+    private Arrow arrow;
 
-    BaseballPlayer owner;
+    private BaseballPlayer owner;
 
-    BaseballManagerTask task;
+    private BaseballManagerTask task;
 
     public Baseball(MineBall instance, Arrow arrow, BaseballPlayer owner) {
         this.plugin = instance;

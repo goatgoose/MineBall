@@ -3,8 +3,10 @@ package com.goatgoose.mineball.Model;
 import com.goatgoose.mineball.MineBall;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,6 @@ public class BaseballPlayer {
     private Location catchBaseballHitboxCenter;
 
     private int catchBaseballHitboxRadius = 2;
-
-    public List<Block> catchBaseballHitBox = new ArrayList<Block>();
 
     public enum Team {
         RED,
@@ -46,7 +46,9 @@ public class BaseballPlayer {
     }
 
     public void baseballCatchEvent() {
-        Bukkit.broadcastMessage("you caught a baseball!");
+        ItemStack bow = new ItemStack(Material.BOW);
+        BaseballItem baseballItem = new BaseballItem(plugin, bow);
+        player.getInventory().addItem(baseballItem.getBow());
     }
 
     public Player getPlayer() {
@@ -82,5 +84,4 @@ public class BaseballPlayer {
         int i = (int) d;
         return d < i ? i - 1 : i;
     }
-
 }
