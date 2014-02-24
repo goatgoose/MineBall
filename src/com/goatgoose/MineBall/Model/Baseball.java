@@ -34,7 +34,6 @@ public class Baseball {
         ItemStack bow = new ItemStack(Material.BOW);
         BaseballItem baseballItem = new BaseballItem(plugin, bow);
         arrow.getWorld().dropItem(arrow.getLocation(), baseballItem.getBow());
-
         arrow.remove();
     }
 

@@ -1,8 +1,6 @@
 package com.goatgoose.mineball.Model;
 
 import com.goatgoose.mineball.MineBall;
-import net.minecraft.server.v1_7_R1.NBTTagCompound;
-import org.bukkit.craftbukkit.v1_7_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -14,11 +12,7 @@ public class BaseballItem {
 
     public BaseballItem(MineBall instance, ItemStack bow) {
         this.plugin = instance;
-        this.bow = bow;
-
-        this.bow = setItemName(this.bow, "Baseball");
-
-
+        this.bow = setItemName(bow, "Baseball");
     }
 
     public ItemStack getBow() {
