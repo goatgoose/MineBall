@@ -12,12 +12,15 @@ public class Baseball {
 
     Arrow arrow;
 
+    BaseballPlayer owner;
+
     BaseballManagerTask task;
 
-    public Baseball(Arrow arrow, MineBall instance) {
+    public Baseball(MineBall instance, Arrow arrow, BaseballPlayer owner) {
         this.plugin = instance;
         this.arrow = arrow;
-        this.task = new BaseballManagerTask(plugin, this);
+        this.owner = owner;
+        this.task = new BaseballManagerTask(plugin, this, this.owner);
     }
 
     public Arrow getArrow() {

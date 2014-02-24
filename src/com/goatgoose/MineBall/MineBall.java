@@ -2,7 +2,7 @@ package com.goatgoose.mineball;
 
 import com.goatgoose.mineball.Listeners.PlayerListener;
 import com.goatgoose.mineball.Model.Baseball;
-import com.goatgoose.mineball.Tasks.BaseballManagerTask;
+import com.goatgoose.mineball.Model.BaseballPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -16,11 +16,9 @@ import java.util.List;
 
 public class MineBall extends JavaPlugin {
 
-    private static PlayerListener playerListener;
+    private PlayerListener playerListener;
 
-    public List<Player> fieldingPlayers = new ArrayList<Player>();
-
-    public List<Player> battingPlayers = new ArrayList<Player>();
+    private List<BaseballPlayer> baseballPlayers = new ArrayList<BaseballPlayer>();
 
     @EventHandler
     public void onEnable() {
@@ -32,6 +30,23 @@ public class MineBall extends JavaPlugin {
     @EventHandler
     public void onDisable() {
 
+    }
+
+    public List<BaseballPlayer> getBaseballPlayers() {
+        return baseballPlayers;
+    }
+
+    public void addBaseballPlayer(BaseballPlayer baseballPlayer) {
+        baseballPlayers.add(baseballPlayer);
+    }
+
+    public BaseballPlayer getBaseballPlayer(Player player) {
+        for(BaseballPlayer baseballPlayer : baseballPlayers) {
+            if(baseballPlayer.getPlayer() == player) {
+                return baseballPlayer;
+            }
+        }
+        return null;
     }
 
 }
