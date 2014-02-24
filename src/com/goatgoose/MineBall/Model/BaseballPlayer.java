@@ -1,15 +1,10 @@
 package com.goatgoose.mineball.Model;
 
 import com.goatgoose.mineball.MineBall;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BaseballPlayer {
 
@@ -19,7 +14,7 @@ public class BaseballPlayer {
 
     private Team team;
 
-    private GameState gameState;
+    private TeamState teamState;
 
     private Location catchBaseballHitboxCenter;
 
@@ -31,7 +26,7 @@ public class BaseballPlayer {
         SPECTATOR
     }
 
-    public enum GameState {
+    public enum TeamState {
         FIELDING,
         HITTING,
         WAITING,
@@ -42,7 +37,7 @@ public class BaseballPlayer {
         this.plugin = instance;
         this.player = player;
         this.team = team;
-        this.gameState = GameState.WAITING;
+        this.teamState = TeamState.WAITING;
     }
 
     public void baseballCatchEvent() {
@@ -59,12 +54,12 @@ public class BaseballPlayer {
         return team;
     }
 
-    public GameState getGameState() {
-        return gameState;
+    public TeamState getTeamState() {
+        return teamState;
     }
 
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
+    public void setTeamState(TeamState teamState) {
+        this.teamState = teamState;
     }
 
     public Location getCatchBaseballHitboxCenter() {

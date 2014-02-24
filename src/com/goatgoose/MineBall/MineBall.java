@@ -24,10 +24,20 @@ public class MineBall extends JavaPlugin {
 
     private List<BaseballPlayer> baseballPlayers = new ArrayList<BaseballPlayer>();
 
+    public GameState gameState;
+
+    public enum GameState {
+        LOBBY,
+        INGAME,
+        ENDGAME
+    }
+
     @EventHandler
     public void onEnable() {
 
         playerListener = new PlayerListener(this);
+
+        gameState = GameState.LOBBY;
 
     }
 
