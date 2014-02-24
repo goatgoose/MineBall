@@ -2,6 +2,7 @@ package com.goatgoose.mineball.Tasks;
 
 import com.goatgoose.mineball.MineBall;
 import com.goatgoose.mineball.Model.Baseball;
+import com.goatgoose.mineball.Model.BaseballItem;
 import com.goatgoose.mineball.Model.BaseballPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
@@ -56,7 +57,7 @@ public class BaseballManagerTask implements Runnable {
                 }
             }
         } else {
-            // TODO create new BaseballItem at this location
+            baseball.replaceWithBaseballItem();
             stopTask();
         }
 

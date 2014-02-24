@@ -16,16 +16,9 @@ public class BaseballItem {
         this.plugin = instance;
         this.bow = bow;
 
-        this.bow = setItemName(bow, "Baseball");
+        this.bow = setItemName(this.bow, "Baseball");
 
-        // add item metadata
-        net.minecraft.server.v1_7_R1.ItemStack nms = CraftItemStack.asNMSCopy(this.bow);
-        NBTTagCompound tag;
-        nms.tag = new NBTTagCompound();
-        tag = nms.tag;
-        nms.tag = tag;
-        tag.setInt("MBBaseballItem", 1);
-        this.bow = CraftItemStack.asCraftMirror(nms);
+
     }
 
     public ItemStack getBow() {

@@ -4,7 +4,10 @@ import com.goatgoose.mineball.MineBall;
 import com.goatgoose.mineball.Tasks.BaseballManagerTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Arrow;
+import org.bukkit.inventory.ItemStack;
 
 public class Baseball {
 
@@ -25,6 +28,14 @@ public class Baseball {
 
     public Arrow getArrow() {
         return arrow;
+    }
+
+    public void replaceWithBaseballItem() {
+        ItemStack bow = new ItemStack(Material.BOW);
+        BaseballItem baseballItem = new BaseballItem(plugin, bow);
+        arrow.getWorld().dropItem(arrow.getLocation(), baseballItem.getBow());
+
+        arrow.remove();
     }
 
 }

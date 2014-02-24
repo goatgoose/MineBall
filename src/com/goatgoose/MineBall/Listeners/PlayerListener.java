@@ -39,7 +39,10 @@ public class PlayerListener implements Listener {
 
             if(shooter == null) {
                 event.setCancelled(true);
+                return;
             }
+
+            shooter.getPlayer().getInventory().remove(shooter.getPlayer().getItemInHand());
         }
     }
 
@@ -57,7 +60,7 @@ public class PlayerListener implements Listener {
         }
 
         else if(baseballPlayer.getGameState() == BaseballPlayer.GameState.HITTING) {
-            // TODO check if on bases and keep from moving if hitting
+
         }
     }
 
@@ -111,8 +114,11 @@ public class PlayerListener implements Listener {
                 }
 
                 baseballPlayerDamaged.baseballCatchEvent();
+                baseballPlayerDamager.getPlayer().getInventory().remove(baseballPlayerDamager.getPlayer().getItemInHand());
             }
         }
     }
+
+    // TODO log out event handler that removes the player from the list
 
 }
