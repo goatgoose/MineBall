@@ -14,7 +14,7 @@ public class BaseballPlayer {
 
     private Team team;
 
-    private TeamState teamState;
+    private State teamState;
 
     private Location catchBaseballHitboxCenter;
 
@@ -23,10 +23,11 @@ public class BaseballPlayer {
     public enum Team {
         RED,
         BLUE,
+        WAITING,
         SPECTATOR
     }
 
-    public enum TeamState {
+    public enum State {
         FIELDING,
         HITTING,
         WAITING,
@@ -37,13 +38,28 @@ public class BaseballPlayer {
         this.plugin = instance;
         this.player = player;
         this.team = team;
-        this.teamState = TeamState.WAITING;
+        this.teamState = State.WAITING;
+        plugin.addBaseballPlayer(this);
     }
 
     public void baseballCatchEvent() {
         ItemStack bow = new ItemStack(Material.BOW);
         BaseballItem baseballItem = new BaseballItem(plugin, bow);
         player.getInventory().addItem(baseballItem.getBow());
+    }
+
+    public int getFCoordinate() {
+        double d = (player.getLocation().getYaw() * 4.0F / 360.0F) + 0.5D;
+        int i = (int) d;
+        return d < i ? i - 1 : i;
+    }
+
+    public void addToGame() {
+        if(plugin.getTeamBlue().size() > plugin.getTeamRed().size() || plugin.getTeamBlue().size() == plugin.getTeamRed().size()) {
+            setTeam(Team.RED);
+        } else if(plugin.getTeamRed().size() > plugin.getTeamBlue().size()) {
+            setTeam(Team.BLUE);
+        }
     }
 
     public Player getPlayer() {
@@ -54,11 +70,15 @@ public class BaseballPlayer {
         return team;
     }
 
-    public TeamState getTeamState() {
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public State getState() {
         return teamState;
     }
 
-    public void setTeamState(TeamState teamState) {
+    public void setState(State teamState) {
         this.teamState = teamState;
     }
 
@@ -72,11 +92,5 @@ public class BaseballPlayer {
 
     public int getCatchBaseballHitboxRadius() {
         return catchBaseballHitboxRadius;
-    }
-
-    public int getFCoordinate() {
-        double d = (player.getLocation().getYaw() * 4.0F / 360.0F) + 0.5D;
-        int i = (int) d;
-        return d < i ? i - 1 : i;
     }
 }

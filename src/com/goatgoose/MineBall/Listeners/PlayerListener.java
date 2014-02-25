@@ -47,49 +47,20 @@ public class PlayerListener implements Listener {
 
         Block block = baseballPlayer.getPlayer().getLocation().getBlock();
 
-        if(baseballPlayer.getTeamState() == BaseballPlayer.TeamState.FIELDING) {
+        if(baseballPlayer.getState() == BaseballPlayer.State.FIELDING) {
             Location playerCenter = baseballPlayer.getPlayer().getLocation();
             playerCenter.setY(baseballPlayer.getPlayer().getLocation().getY() + 1);
             baseballPlayer.setCatchBaseballHitboxCenter(playerCenter);
         }
 
-        else if(baseballPlayer.getTeamState() == BaseballPlayer.TeamState.HITTING) {
+        else if(baseballPlayer.getState() == BaseballPlayer.State.HITTING) {
 
         }
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-
-        Player player = event.getPlayer();
-
-        int playersOnRedTeam = 0;
-        int playersOnBlueTeam = 0;
-
-        for(BaseballPlayer baseballPlayer : plugin.getBaseballPlayers()) {
-            if(baseballPlayer.getTeam() == BaseballPlayer.Team.RED) {
-                playersOnRedTeam = playersOnRedTeam + 1;
-            } else if(baseballPlayer.getTeam() == BaseballPlayer.Team.BLUE) {
-                playersOnBlueTeam = playersOnBlueTeam + 1;
-            }
-        }
-
-        if(playersOnBlueTeam > playersOnRedTeam || playersOnBlueTeam == playersOnRedTeam) {
-            BaseballPlayer baseballPlayer = new BaseballPlayer(plugin, player, BaseballPlayer.Team.RED);
-
-            // TEMP DEV SETTINGS
-            baseballPlayer.setTeamState(BaseballPlayer.TeamState.FIELDING);
-
-            plugin.addBaseballPlayer(baseballPlayer);
-        } else if(playersOnRedTeam > playersOnBlueTeam) {
-            BaseballPlayer baseballPlayer = new BaseballPlayer(plugin, player, BaseballPlayer.Team.BLUE);
-
-            // TEMP DEV SETTINGS
-            baseballPlayer.setTeamState(BaseballPlayer.TeamState.FIELDING);
-
-            plugin.addBaseballPlayer(baseballPlayer);
-        }
-
+        BaseballPlayer newBaseballPlayer = new BaseballPlayer(plugin, event.getPlayer(), BaseballPlayer.Team.WAITING);
     }
 
     @EventHandler
